@@ -1,0 +1,15 @@
+{
+  "name": "resilis-nodejs-task-board",
+  "version": "1.0.0",
+  "type": "module",
+  "private": false,
+  "description": "A small editable task board built with Node.js and vanilla browser code.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.15"
+  },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env src/server.js",
+    "test": "node --test"
+  }
+}
