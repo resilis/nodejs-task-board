@@ -135,6 +135,7 @@ async function route(request, response) {
   const pathname = url.pathname;
 
   if (request.method !== "GET" && request.method !== "HEAD") {
+    request.resume();
     if (READ_ONLY) {
       sendProblem(response, 403, "demo_read_only", "This shared demo does not accept changes.");
       return;
@@ -195,7 +196,7 @@ async function handleWrite(request, response, pathname) {
     sendJson(response, 201, task);
     return true;
   }
-  const taskMatch = pathname.match(/^\/api\/tasks\/([0-9a-f-]{36})$/i);
+  const taskMatch = pathname.match(/^\/api\/tasks\/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i);
   if (taskMatch && request.method === "PATCH") {
     const body = await readJson(request);
     validateKeys(body, new Set(["title", "status"]));
